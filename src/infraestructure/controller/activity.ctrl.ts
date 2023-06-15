@@ -15,6 +15,10 @@ export class ActivityController{
         this.getFollowedUsersActivitiesCtrl=this.getFollowedUsersActivitiesCtrl.bind(this);
 
         this.getActivitiesByLocationCtrl=this.getActivitiesByLocationCtrl.bind(this);
+        this.getAllActivitiesByUserCtrl=this.getAllActivitiesByUserCtrl.bind(this);
+        this.getAllActivitiesCreatedByUserCtrl=this.getAllActivitiesCreatedByUserCtrl.bind(this);
+        this.getActivitiesByUserAndMonthCtrl=this.getActivitiesByUserAndMonthCtrl.bind(this);
+        this.getActivitiesByUserLast6WeeksCtrl=this.getActivitiesByUserLast6WeeksCtrl.bind(this);
     }
 
     /*
@@ -89,6 +93,14 @@ export class ActivityController{
         res.send(data);
     }
 
+    /*public async getActivitiesByUserAndYearCtrl({ params }: Request, res: Response) {
+        const { uuid, date } = params;
+        const startDate = new Date(date);
+        const response = await this.activityUseCase.getActivitiesByUserAndYear(uuid, startDate);
+        const data = response ? response : "NOT_FOUND";
+        res.send(data);
+      }*/
+
     public async getFollowedUsersActivitiesCtrl({params}:Request,res:Response){
         const {uuid,numPage,date}=params;
         const startDate = new Date(date);
@@ -96,5 +108,34 @@ export class ActivityController{
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     }
+    public async getAllActivitiesByUserCtrl({params}:Request,res:Response){
+        const {uuid}=params;
+        console.log("controller",uuid);
+        const response=await this.activityUseCase.getAllActivitiesByUser(uuid); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    }
 
+    public async getAllActivitiesCreatedByUserCtrl({params}:Request,res:Response){
+        const {uuid}=params;
+        console.log("controller",uuid);
+        const response=await this.activityUseCase.getAllActivitiesCreatedByUser(uuid); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    }
+
+    public async getActivitiesByUserAndMonthCtrl({params}:Request,res:Response){
+        const {uuid,date}=params;
+        const startDate = new Date(date);
+        const response=await this.activityUseCase.getActivitiesByUserAndMonth(uuid,startDate); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    }
+
+    public async getActivitiesByUserLast6WeeksCtrl({params}:Request,res:Response){
+        const {uuid}=params;
+        const response=await this.activityUseCase.getActivitiesByUserLast6Weeks(uuid); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    }
 }

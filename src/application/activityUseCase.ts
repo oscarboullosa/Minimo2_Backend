@@ -84,5 +84,25 @@ export class ActivityUseCase{
         const activities=await this.activityRepository.getFollowedUsersActivities(uuid,page,startDate);
         return activities;
     }
+    public getAllActivitiesByUser=async(uuid:string)=>{
+        const activities=await this.activityRepository.getAllActivitiesByUser(uuid);
+        console.log("usecase",activities);
+        return activities;
+    }
 
+    public getAllActivitiesCreatedByUser=async(uuid:string)=>{
+        const activities=await this.activityRepository.getAllActivitiesCreatedByUser(uuid);
+        console.log("usecase",activities);
+        return activities;
+    }
+
+    public getActivitiesByUserAndMonth=async(uuid: string, startDate: Date)=>{
+        const activities=await this.activityRepository.getActivitiesByUserAndMonth(uuid,startDate);
+        return activities;
+    }
+
+    public getActivitiesByUserLast6Weeks=async(uuid: string)=>{
+        const activities=await this.activityRepository.getActivitiesByUserLast6Weeks(uuid);
+        return activities;
+    }
 }
